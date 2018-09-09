@@ -1,17 +1,47 @@
 <?php
-
+/*
 $dbconn = pg_connect("host=localhost port=5432 dbname=art_db user=postgres password=962603");
-$result = pg_query($dbconn, "INSERT INTO account3 (user_id,username) VALUES (4,'Armin4');");
-$result = pg_query($dbconn, "SELECT*FROM account3;");
-echo "<table>\n";
-while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-    echo "\t<tr>\n";
-    foreach ($line as $col_value) {
-        echo "\t\t<td>$col_value</td>\n";
+$result = pg_query($dbconn, "CREATE TYPE countryType AS
+( countryID INTEGER, 
+  countryName VARCHAR(40),
+  countryCode VARCHAR(40)
+);");
+
+print_r($result);*/
+
+ 
+
+ 
+require_once('Connection.php');
+require_once('PostgreSQLCreateTable.php');
+ 
+try {
+    
+    // connect to the PostgreSQL database
+    $pdo = Connection::get()->connect();
+    
+    // 
+    $tableCreator = new PostgreSQLCreateTable($pdo);
+    
+    // create tables and query the table from the
+    // database
+$tableCreator->createTables();
+    $tables = $tableCreator->getTables();
+    $types = $tableCreator->getType();
+
+  
+echo 'tables<br>';
+ foreach ($tables as $table){
+        echo $table . '<br>';
     }
-    echo "\t</tr>\n";
+echo '<br>types<br>';
+  foreach ($types as $type){
+        echo $type . '<br>';
+    }
+    
+} catch (\PDOException $e) {
+    echo $e->getMessage();
 }
-echo "</table>\n";
 
 
 

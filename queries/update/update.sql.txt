@@ -1,0 +1,16 @@
+--1.
+SELECT c.getCountryName() FROM country c;
+--2
+SELECT c.getCityName() FROM city c;
+--3
+SELECT p.getPeriodInfo() FROM period p;
+--4
+SELECT s.getPerson() FROM staff s;
+--5
+SELECT a.getPerson() FROM author a;
+--6
+SELECT t.getTypeOfExhibitName() FROM typeOfExhibit t;
+--7
+SELECT r.getRoomInfo() FROM room r;
+--8
+SELECT e.getExhibitionInfo() FROM exhibition e;
